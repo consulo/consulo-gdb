@@ -1,13 +1,18 @@
 <idea-plugin>
-  <id>org.mustbe.consulo.gdb</id>
-  <name>IdeaGDB</name>
-  <version>0.1</version>
-  <vendor>Chris Spencer</vendor>
+	<id>org.mustbe.consulo.gdb</id>
+	<name>GDB</name>
+	<version>SNAPSHOT</version>
+	<vendor>Chris Spencer</vendor>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <configurationType implementation="uk.co.cwspencer.ideagdb.run.GdbRunConfigurationType"/>
-    <programRunner implementation="uk.co.cwspencer.ideagdb.run.GdbRunner" order="last"/>
-    <xdebugger.breakpointType
-        implementation="uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType"/>
-  </extensions>
+	<extensionPoints>
+		<extensionPoint name="supportProvider" interface="org.mustbe.consulo.gdb.GdbSupportProvider" />
+	</extensionPoints>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<configurationType implementation="uk.co.cwspencer.ideagdb.run.GdbRunConfigurationType"/>
+
+		<programRunner implementation="uk.co.cwspencer.ideagdb.run.GdbRunner" order="last"/>
+
+		<xdebugger.breakpointType implementation="uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType"/>
+	</extensions>
 </idea-plugin>

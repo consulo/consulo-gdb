@@ -1,47 +1,31 @@
 package uk.co.cwspencer.ideagdb.debug.breakpoints;
 
-import com.intellij.openapi.diagnostic.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.gdb.GdbSupportProvider;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.util.ArrayUtil;
+import com.intellij.xdebugger.breakpoints.XLineBreakpointTypeBase;
+import uk.co.cwspencer.ideagdb.debug.GdbDebuggerEditorsProvider;
 
-public class GdbBreakpointType extends XLineBreakpointType<GdbBreakpointProperties>
+public class GdbBreakpointType extends XLineBreakpointTypeBase
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType");
-
 	public GdbBreakpointType()
 	{
-		super("gdb", "GDB Breakpoints");
-	}
-
-	@Nullable
-	@Override
-	public GdbBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line)
-	{
-		m_log.warn("createBreakpointProperties: stub");
-		return null;
+		super("gdb", "GDB Breakpoints", new GdbDebuggerEditorsProvider());
 	}
 
 	@Override
 	public boolean canPutAt(@NotNull VirtualFile file, int line, @NotNull Project project)
 	{
-		// TODO: We can't just always return true because otherwise it prevents Java breakpoints
-		// being set. It seems like there should be a better way to do this though..
-		String extension = file.getExtension();
-		if (extension != null &&
-			(extension.equals("c") ||
-			extension.equals("cpp") ||
-			extension.equals("cxx") ||
-			extension.equals("cc") ||
-			extension.equals("h") ||
-			extension.equals("hpp") ||
-			extension.equals("hh") ||
-			extension.equals("hxx")))
+		FileType fileType = file.getFileType();
+		for(GdbSupportProvider gdbSupportProvider : GdbSupportProvider.EP_NAME.getExtensions())
 		{
-			return true;
+			if(ArrayUtil.contains(fileType, gdbSupportProvider.getApplicableFileTypes()))
+			{
+				return true;
+			}
 		}
 		return false;
 	}

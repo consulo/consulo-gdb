@@ -1,36 +1,52 @@
 package uk.co.cwspencer.ideagdb.run;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.gdb.GdbSupportProvider;
+import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public class GdbRunConfigurationType implements ConfigurationType
 {
-	private final ConfigurationFactory m_factory = new ConfigurationFactory(this)
-		{
-			public RunConfiguration createTemplateConfiguration(Project project)
-			{
-				return new GdbRunConfiguration("", project, this);
-			}
-
-			@Override
-			public boolean canConfigurationBeSingleton()
-			{
-				return false;
-			}
-		};
-
+	@NotNull
 	public static GdbRunConfigurationType getInstance()
 	{
 		return ConfigurationTypeUtil.findConfigurationType(GdbRunConfigurationType.class);
 	}
+
+	private final ConfigurationFactory myFactory = new ConfigurationFactory(this)
+	{
+		@Override
+		public RunConfiguration createTemplateConfiguration(Project project)
+		{
+			return new GdbRunConfiguration("Unnamed", project, this);
+		}
+
+		@Override
+		public boolean isApplicable(@NotNull Project project)
+		{
+			for(GdbSupportProvider gdbSupportProvider : GdbSupportProvider.EP_NAME.getExtensions())
+			{
+				if(ModuleExtensionHelper.getInstance(project).hasModuleExtension(gdbSupportProvider.getApplicableModuleExtension()))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public boolean canConfigurationBeSingleton()
+		{
+			return false;
+		}
+	};
 
 	@Override
 	public String getDisplayName()
@@ -60,11 +76,6 @@ public class GdbRunConfigurationType implements ConfigurationType
 	@Override
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
-		return new ConfigurationFactory[] { m_factory };
-	}
-
-	public ConfigurationFactory getFactory()
-	{
-		return m_factory;
+		return new ConfigurationFactory[]{myFactory};
 	}
 }

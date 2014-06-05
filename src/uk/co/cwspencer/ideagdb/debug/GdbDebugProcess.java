@@ -22,6 +22,7 @@ import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
+import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.GdbListener;
@@ -34,7 +35,6 @@ import uk.co.cwspencer.gdb.messages.GdbStoppedEvent;
 import uk.co.cwspencer.gdb.messages.GdbThread;
 import uk.co.cwspencer.gdb.messages.GdbThreadInfo;
 import uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointHandler;
-import uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointProperties;
 import uk.co.cwspencer.ideagdb.run.GdbRunConfiguration;
 
 public class GdbDebugProcess extends XDebugProcess implements GdbListener
@@ -386,7 +386,7 @@ public class GdbDebugProcess extends XDebugProcess implements GdbListener
 		GdbSuspendContext suspendContext = new GdbSuspendContext(myGdb, stoppedEvent, threads);
 
 		// Find the breakpoint if necessary
-		XBreakpoint<GdbBreakpointProperties> breakpoint = null;
+		XBreakpoint<XBreakpointProperties> breakpoint = null;
 		if (stoppedEvent.reason == GdbStoppedEvent.Reason.BreakpointHit &&
 			stoppedEvent.breakpointNumber != null)
 		{

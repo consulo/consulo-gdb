@@ -53,13 +53,6 @@ public class GdbRunConfiguration extends ModuleBasedConfiguration<RunConfigurati
 		return null;
 	}
 
-	@Override
-	protected ModuleBasedConfiguration createInstance()
-	{
-		return new GdbRunConfiguration(getName(), getProject(),
-			GdbRunConfigurationType.getInstance().getFactory());
-	}
-
 	@NotNull
 	@Override
 	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor()
