@@ -56,7 +56,8 @@ public class GdbRunner extends DefaultProgramRunner
 			public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException
 			{
 				final ExecutionResult result = state.execute(env.getExecutor(), GdbRunner.this);
-				return new GdbDebugProcess(session, (GdbExecutionResult) result);
+				assert result != null;
+				return new GdbDebugProcess(session, env, result.getExecutionConsole());
 			}
 		});
 		return debugSession.getRunContentDescriptor();
