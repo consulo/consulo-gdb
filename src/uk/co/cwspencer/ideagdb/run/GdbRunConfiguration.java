@@ -12,7 +12,6 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ModuleBasedConfiguration;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationModule;
-import com.intellij.execution.configurations.RunConfigurationWithSuppressedDefaultDebugAction;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
@@ -25,8 +24,7 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 
 public class GdbRunConfiguration extends ModuleBasedConfiguration<RunConfigurationModule>
-	implements RunConfigurationWithSuppressedDefaultRunAction,
-	RunConfigurationWithSuppressedDefaultDebugAction
+	implements RunConfigurationWithSuppressedDefaultRunAction
 {
 	private static final Logger m_log =
 		Logger.getInstance("#uk.co.cwspencer.ideagdb.run.GdbRunConfiguration");
