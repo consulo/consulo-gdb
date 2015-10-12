@@ -10,7 +10,6 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
@@ -34,22 +33,11 @@ public class GdbRunner extends DefaultProgramRunner
 	}
 
 	@Override
-	protected RunContentDescriptor doExecute(
-			Project project, RunProfileState state, RunContentDescriptor contentToReuse, ExecutionEnvironment env) throws ExecutionException
-	{
-		FileDocumentManager.getInstance().saveAllDocuments();
-		return createContentDescriptor(project, state, contentToReuse, env);
-	}
-
-
 	@Nullable
-	protected RunContentDescriptor createContentDescriptor(
-			Project project,
-			final RunProfileState state,
-			RunContentDescriptor contentToReuse,
-			final ExecutionEnvironment env) throws ExecutionException
+	protected RunContentDescriptor doExecute(@NotNull final RunProfileState state, @NotNull final ExecutionEnvironment env) throws ExecutionException
 	{
-		final XDebugSession debugSession = XDebuggerManager.getInstance(project).startSession(this, env, contentToReuse, new XDebugProcessStarter()
+		Project project = env.getProject();
+		final XDebugSession debugSession = XDebuggerManager.getInstance(project).startSession(env, new XDebugProcessStarter()
 		{
 			@NotNull
 			@Override
