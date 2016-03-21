@@ -1,11 +1,10 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.evaluation.EvaluationMode;
-import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
 import uk.co.cwspencer.gdb.messages.GdbEvent;
@@ -58,25 +57,6 @@ public class GdbEvaluator extends XDebuggerEvaluator
 					onGdbExpressionReady(event, callback);
 				}
 			});
-	}
-
-	/**
-	 * Evaluates the given expression.
-	 * @param expression The expression to evaluate.
-	 * @param callback The callback function.
-	 * @param expressionPosition ??
-	 * @param mode Evaluation mode for the expression.
-	 */
-	@Override
-	public void evaluate(@NotNull String expression, XEvaluationCallback callback,
-		@Nullable XSourcePosition expressionPosition, @Nullable EvaluationMode mode)
-	{
-		if (mode != null && mode != EvaluationMode.EXPRESSION)
-		{
-			throw new IllegalArgumentException("Unsupported expression evaluation mode");
-		}
-
-		evaluate(expression, callback, expressionPosition);
 	}
 
 	/**
