@@ -1,32 +1,21 @@
 package uk.co.cwspencer.ideagdb.debug.breakpoints;
 
+import org.consulo.lombok.annotations.LazyInstance;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.gdb.GdbSupportProvider;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ArrayUtil;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointTypeBase;
 import uk.co.cwspencer.ideagdb.debug.GdbDebuggerEditorsProvider;
 
 public class GdbBreakpointType extends XLineBreakpointTypeBase
 {
-	public GdbBreakpointType()
+	@NotNull
+	@LazyInstance
+	public static GdbBreakpointType getInstance()
 	{
-		super("gdb", "GDB Breakpoints", new GdbDebuggerEditorsProvider());
+		return EXTENSION_POINT_NAME.findExtension(GdbBreakpointType.class);
 	}
 
-	@Override
-	public boolean canPutAt(@NotNull VirtualFile file, int line, @NotNull Project project)
+	public GdbBreakpointType()
 	{
-		FileType fileType = file.getFileType();
-		for(GdbSupportProvider gdbSupportProvider : GdbSupportProvider.EP_NAME.getExtensions())
-		{
-			if(ArrayUtil.contains(fileType, gdbSupportProvider.getApplicableFileTypes()))
-			{
-				return true;
-			}
-		}
-		return false;
+		super("gdb-line-breakpoint", "GDB Line Breakpoints", new GdbDebuggerEditorsProvider());
 	}
 }

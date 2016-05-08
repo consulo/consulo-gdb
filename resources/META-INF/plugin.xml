@@ -1,11 +1,11 @@
 <idea-plugin>
-	<id>org.mustbe.consulo.gdb</id>
+	<id>consulo.gdb</id>
 	<name>GDB</name>
 	<version>SNAPSHOT</version>
 	<vendor>Chris Spencer</vendor>
 
 	<extensionPoints>
-		<extensionPoint name="supportProvider" interface="org.mustbe.consulo.gdb.GdbSupportProvider" />
+		<extensionPoint name="supportProvider" interface="consulo.gdb.GdbSupportProvider" />
 	</extensionPoints>
 
 	<extensions defaultExtensionNs="com.intellij">
