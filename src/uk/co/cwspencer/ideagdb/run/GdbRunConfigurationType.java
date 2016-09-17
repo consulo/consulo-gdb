@@ -3,7 +3,6 @@ package uk.co.cwspencer.ideagdb.run;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.ConfigurationTypeUtil;
@@ -11,6 +10,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import consulo.gdb.GdbSupportProvider;
+import consulo.module.extension.ModuleExtensionHelper;
 
 public class GdbRunConfigurationType implements ConfigurationType
 {

@@ -1,8 +1,8 @@
 package consulo.gdb;
 
-import org.consulo.module.extension.ModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.extensions.ExtensionPointName;
+import consulo.module.extension.ModuleExtension;
 
 /**
  * @author VISTALL
