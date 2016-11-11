@@ -1,20 +1,18 @@
 package uk.co.cwspencer.ideagdb.debug;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
-import org.jetbrains.annotations.Nullable;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
 import uk.co.cwspencer.gdb.messages.GdbEvent;
 import uk.co.cwspencer.gdb.messages.GdbStackFrame;
 import uk.co.cwspencer.gdb.messages.GdbStackTrace;
-import uk.co.cwspencer.gdb.messages.GdbStoppedEvent;
 import uk.co.cwspencer.gdb.messages.GdbThread;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GdbExecutionStack extends XExecutionStack
 {
@@ -63,11 +61,10 @@ public class GdbExecutionStack extends XExecutionStack
 	/**
 	 * Gets the stack trace starting at the given index. This passes the request and returns
 	 * immediately; the data is supplied to container asynchronously.
-	 * @param firstFrameIndex The first frame to retrieve, where 0 is the top of the stack.
 	 * @param container Container into which the stack frames are inserted.
 	 */
 	@Override
-	public void computeStackFrames(final int firstFrameIndex, final XStackFrameContainer container)
+	public void computeStackFrames(final XStackFrameContainer container)
 	{
 		// Just get the whole stack
 		String command = "-stack-list-frames";
@@ -76,7 +73,7 @@ public class GdbExecutionStack extends XExecutionStack
 				@Override
 				public void onGdbCommandCompleted(GdbEvent event)
 				{
-					onGdbStackTraceReady(event, firstFrameIndex, container);
+					onGdbStackTraceReady(event, container);
 				}
 			});
 	}
@@ -84,11 +81,9 @@ public class GdbExecutionStack extends XExecutionStack
 	/**
 	 * Callback function for when GDB has responded to our stack trace request.
 	 * @param event The event.
-	 * @param firstFrameIndex The first frame from the list to use.
 	 * @param container The container passed to computeStackFrames().
 	 */
-	private void onGdbStackTraceReady(GdbEvent event, int firstFrameIndex,
-		XStackFrameContainer container)
+	private void onGdbStackTraceReady(GdbEvent event, XStackFrameContainer container)
 	{
 		if (event instanceof GdbErrorEvent)
 		{
@@ -112,7 +107,7 @@ public class GdbExecutionStack extends XExecutionStack
 
 		// Build a list of GdbExecutionStaceFrames
 		List<GdbExecutionStackFrame> stack = new ArrayList<GdbExecutionStackFrame>();
-		for (int i = firstFrameIndex; i < stackTrace.stack.size(); ++i)
+		for (int i = 0; i < stackTrace.stack.size(); ++i)
 		{
 			GdbStackFrame frame = stackTrace.stack.get(i);
 			stack.add(new GdbExecutionStackFrame(m_gdb, m_thread.id, frame));
