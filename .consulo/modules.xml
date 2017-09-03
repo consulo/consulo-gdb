@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
+<project>
   <component name="ModuleManager">
     <modules>
       <module name="consulo-gdb" dirurl="file://$PROJECT_DIR$" current-layer="Default">
@@ -9,7 +9,6 @@
           <content url="file://$MODULE_DIR$">
             <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
             <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
-            <content-folder type="TEST" url="file://$MODULE_DIR$/test" />
           </content>
           <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
           <orderEntry type="module-extension-sdk" extension-id="java" />
