@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-gdb)
+[![Build Status](https://ci.consulo.io/view/consulo/job/consulo-gdb/badge/icon)](https://ci.consulo.io/view/consulo/job/consulo-gdb/)
