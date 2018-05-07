@@ -1,7 +1,5 @@
 package uk.co.cwspencer.ideagdb.run;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
@@ -11,6 +9,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import consulo.gdb.GdbSupportProvider;
 import consulo.module.extension.ModuleExtensionHelper;
+import consulo.ui.image.Image;
 
 public class GdbRunConfigurationType implements ConfigurationType
 {
@@ -61,7 +60,7 @@ public class GdbRunConfigurationType implements ConfigurationType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return AllIcons.RunConfigurations.Application;
 	}
