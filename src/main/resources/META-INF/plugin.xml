@@ -1,8 +1,12 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.gdb</id>
 	<name>GDB</name>
 	<version>SNAPSHOT</version>
 	<vendor>Chris Spencer</vendor>
+
+	<tags>
+		<tag>run.debugger</tag>
+	</tags>
 
 	<extensionPoints>
 		<extensionPoint name="supportProvider" interface="consulo.gdb.GdbSupportProvider" />
@@ -15,4 +19,4 @@
 
 		<xdebugger.breakpointType implementation="uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType"/>
 	</extensions>
-</idea-plugin>
+</consulo-plugin>
