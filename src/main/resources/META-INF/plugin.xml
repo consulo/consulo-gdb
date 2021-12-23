@@ -1,4 +1,4 @@
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/consulo-gdb">
 	<id>consulo.gdb</id>
 	<name>GDB</name>
 	<version>SNAPSHOT</version>
