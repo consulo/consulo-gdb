@@ -1,70 +1,71 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import com.intellij.execution.impl.ConsoleViewImpl;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
+import consulo.execution.ui.console.ConsoleView;
+import consulo.execution.ui.console.TextConsoleBuilder;
+import consulo.execution.ui.console.TextConsoleBuilderFactory;
+import consulo.logging.Logger;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import uk.co.cwspencer.gdb.Gdb;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
 
 /**
  * Console tab for GDB input and output.
  */
 public class GdbConsoleView
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbConsoleView");
+	private static final Logger m_log = Logger.getInstance(GdbConsoleView.class);
 
 	private JPanel m_contentPanel;
 	private JTextField m_prompt;
-	private JPanel m_consoleContainer;
 
 	private Gdb m_gdb;
 
 	// The actual console
-	private ConsoleViewImpl m_console;
+	private ConsoleView m_console;
 
 	// The last command that was sent
 	private String m_lastCommand;
 
 	public GdbConsoleView(Gdb gdb, @NotNull Project project)
 	{
+		m_contentPanel = new JPanel(new BorderLayout());
+		m_prompt = new JTextField();
+
 		m_gdb = gdb;
-		m_console = new ConsoleViewImpl(project, true);
-		m_consoleContainer.add(m_console.getComponent(), BorderLayout.CENTER);
+		TextConsoleBuilder builder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
+		builder.setUsePredefinedMessageFilter(true);
+		builder.setViewer(true);
+		m_console = builder.getConsole();
+		m_contentPanel.add(m_console.getComponent(), BorderLayout.CENTER);
 		m_prompt.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
 			{
-				@Override
-				public void actionPerformed(ActionEvent event)
+				String command = event.getActionCommand();
+				if(command.isEmpty() && m_lastCommand != null)
 				{
-					String command = event.getActionCommand();
-					if (command.isEmpty() && m_lastCommand != null)
-					{
-						// Resend the last command
-						m_gdb.sendCommand(m_lastCommand);
-					}
-					else if (!command.isEmpty())
-					{
-						// Send the command to GDB
-						m_lastCommand = command;
-						m_prompt.setText("");
-						m_gdb.sendCommand(command);
-					}
+					// Resend the last command
+					m_gdb.sendCommand(m_lastCommand);
 				}
-			});
+				else if(!command.isEmpty())
+				{
+					// Send the command to GDB
+					m_lastCommand = command;
+					m_prompt.setText("");
+					m_gdb.sendCommand(command);
+				}
+			}
+		});
+		m_contentPanel.add(m_prompt, BorderLayout.SOUTH);
 	}
 
-	public ConsoleViewImpl getConsole()
+	public ConsoleView getConsole()
 	{
 		return m_console;
 	}

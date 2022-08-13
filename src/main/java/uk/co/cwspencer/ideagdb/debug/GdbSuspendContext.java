@@ -1,7 +1,7 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import com.intellij.xdebugger.frame.XExecutionStack;
-import com.intellij.xdebugger.frame.XSuspendContext;
+import consulo.execution.debug.frame.XExecutionStack;
+import consulo.execution.debug.frame.XSuspendContext;
 import org.jetbrains.annotations.Nullable;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.messages.GdbStoppedEvent;

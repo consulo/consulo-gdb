@@ -1,10 +1,10 @@
 package uk.co.cwspencer.ideagdb.debug;
 
+import consulo.execution.debug.XSourcePosition;
+import consulo.execution.debug.evaluation.XDebuggerEvaluator;
+import consulo.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
 import uk.co.cwspencer.gdb.messages.GdbEvent;
@@ -16,8 +16,7 @@ import uk.co.cwspencer.gdb.messages.GdbVariableObjects;
  */
 public class GdbEvaluator extends XDebuggerEvaluator
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbEvaluator");
+	private static final Logger m_log = Logger.getInstance(GdbEvaluator.class);
 
 	// The GDB instance
 	private Gdb m_gdb;

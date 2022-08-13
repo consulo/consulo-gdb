@@ -1,39 +1,21 @@
 package uk.co.cwspencer.gdb;
 
-import com.intellij.openapi.diagnostic.Logger;
-import uk.co.cwspencer.gdb.gdbmi.GdbMiUtil;
-import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
-import uk.co.cwspencer.gdb.messages.GdbEvent;
-import uk.co.cwspencer.gdb.messages.GdbFeatures;
-import uk.co.cwspencer.gdb.messages.GdbMiMessageConverter;
-import uk.co.cwspencer.gdb.gdbmi.GdbMiParser;
-import uk.co.cwspencer.gdb.gdbmi.GdbMiRecord;
-import uk.co.cwspencer.gdb.gdbmi.GdbMiResultRecord;
-import uk.co.cwspencer.gdb.gdbmi.GdbMiStreamRecord;
-import uk.co.cwspencer.gdb.messages.GdbVariableObject;
-import uk.co.cwspencer.gdb.messages.GdbVariableObjectChange;
-import uk.co.cwspencer.gdb.messages.GdbVariableObjectChanges;
-import uk.co.cwspencer.gdb.messages.GdbVariableObjects;
-import uk.co.cwspencer.gdb.messages.GdbVariables;
+import consulo.logging.Logger;
+import uk.co.cwspencer.gdb.gdbmi.*;
+import uk.co.cwspencer.gdb.messages.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class for interacting with GDB.
  */
 public class Gdb
 {
-	private static final Logger m_log = Logger.getInstance("#uk.co.cwspencer.gdb.Gdb");
+	private static final Logger m_log = Logger.getInstance(Gdb.class);
 
 	/**
 	 * Interface for callbacks for results from completed GDB commands.

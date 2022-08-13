@@ -1,16 +1,18 @@
 package uk.co.cwspencer.ideagdb.run;
 
-import org.jetbrains.annotations.NotNull;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.ConfigurationTypeUtil;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.project.Project;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.AllIcons;
+import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.ConfigurationTypeUtil;
+import consulo.execution.configuration.RunConfiguration;
 import consulo.gdb.GdbSupportProvider;
 import consulo.module.extension.ModuleExtensionHelper;
+import consulo.project.Project;
 import consulo.ui.image.Image;
+import org.jetbrains.annotations.NotNull;
 
+@ExtensionImpl
 public class GdbRunConfigurationType implements ConfigurationType
 {
 	@NotNull

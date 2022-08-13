@@ -1,23 +1,18 @@
 package uk.co.cwspencer.ideagdb.debug;
 
+import consulo.execution.debug.frame.XExecutionStack;
+import consulo.execution.debug.frame.XStackFrame;
+import consulo.logging.Logger;
+import org.jetbrains.annotations.Nullable;
+import uk.co.cwspencer.gdb.Gdb;
+import uk.co.cwspencer.gdb.messages.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.xdebugger.frame.XExecutionStack;
-import com.intellij.xdebugger.frame.XStackFrame;
-import uk.co.cwspencer.gdb.Gdb;
-import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
-import uk.co.cwspencer.gdb.messages.GdbEvent;
-import uk.co.cwspencer.gdb.messages.GdbStackFrame;
-import uk.co.cwspencer.gdb.messages.GdbStackTrace;
-import uk.co.cwspencer.gdb.messages.GdbThread;
-
 public class GdbExecutionStack extends XExecutionStack
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbExecutionStack");
+	private static final Logger m_log = Logger.getInstance(GdbExecutionStack.class);
 
 	// The GDB instance
 	private Gdb m_gdb;

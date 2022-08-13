@@ -7,16 +7,4 @@
 	<tags>
 		<tag>run.debugger</tag>
 	</tags>
-
-	<extensionPoints>
-		<extensionPoint name="supportProvider" interface="consulo.gdb.GdbSupportProvider" />
-	</extensionPoints>
-
-	<extensions defaultExtensionNs="com.intellij">
-		<configurationType implementation="uk.co.cwspencer.ideagdb.run.GdbRunConfigurationType"/>
-
-		<programRunner implementation="uk.co.cwspencer.ideagdb.run.GdbRunner" order="last"/>
-
-		<xdebugger.breakpointType implementation="uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType"/>
-	</extensions>
 </consulo-plugin>

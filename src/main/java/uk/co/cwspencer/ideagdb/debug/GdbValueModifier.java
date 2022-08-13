@@ -1,7 +1,7 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.xdebugger.frame.XValueModifier;
+import consulo.execution.debug.frame.XValueModifier;
+import consulo.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uk.co.cwspencer.gdb.Gdb;
@@ -10,15 +10,12 @@ import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
 import uk.co.cwspencer.gdb.messages.GdbEvent;
 import uk.co.cwspencer.gdb.messages.GdbVariableObject;
 
-import java.io.IOException;
-
 /**
  * Value modifier for GDB variables.
  */
 public class GdbValueModifier extends XValueModifier
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbValueModifier");
+	private static final Logger m_log = Logger.getInstance(GdbValueModifier.class);
 
 	// Handle to the GDB instance
 	Gdb m_gdb;

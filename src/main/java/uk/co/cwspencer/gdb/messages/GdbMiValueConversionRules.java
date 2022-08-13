@@ -1,6 +1,6 @@
 package uk.co.cwspencer.gdb.messages;
 
-import com.intellij.openapi.diagnostic.Logger;
+import consulo.logging.Logger;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiList;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiResult;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiValue;
@@ -22,8 +22,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class GdbMiValueConversionRules
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.gdb.messages.GdbMiValueConversionRules");
+	private static final Logger m_log = Logger.getInstance(GdbMiValueConversionRules.class);
 
 	/**
 	 * Converts results where the target type has a GdbMiObject annotation.

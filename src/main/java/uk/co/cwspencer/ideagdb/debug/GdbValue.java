@@ -1,15 +1,10 @@
 package uk.co.cwspencer.ideagdb.debug;
 
+import consulo.application.AllIcons;
+import consulo.execution.debug.frame.*;
+import consulo.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.xdebugger.frame.XCompositeNode;
-import com.intellij.xdebugger.frame.XValue;
-import com.intellij.xdebugger.frame.XValueChildrenList;
-import com.intellij.xdebugger.frame.XValueModifier;
-import com.intellij.xdebugger.frame.XValueNode;
-import com.intellij.xdebugger.frame.XValuePlace;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiUtil;
 import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
@@ -22,8 +17,7 @@ import uk.co.cwspencer.gdb.messages.GdbVariableObjects;
  */
 public class GdbValue extends XValue
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbValue");
+	private static final Logger m_log = Logger.getInstance(GdbValue.class);
 
 	// The GDB instance
 	private Gdb m_gdb;

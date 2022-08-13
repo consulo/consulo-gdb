@@ -1,6 +1,6 @@
 package uk.co.cwspencer.gdb.messages;
 
-import com.intellij.openapi.diagnostic.Logger;
+import consulo.logging.Logger;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiList;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiResult;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiResultRecord;
@@ -10,11 +10,7 @@ import uk.co.cwspencer.gdb.messages.annotations.GdbMiDoneEvent;
 import uk.co.cwspencer.gdb.messages.annotations.GdbMiEvent;
 import uk.co.cwspencer.gdb.messages.annotations.GdbMiField;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,8 +19,7 @@ import java.util.List;
  */
 public class GdbMiMessageConverter
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.gdb.messages.GdbMiMessageConverter");
+	private static final Logger m_log = Logger.getInstance(GdbMiMessageConverter.class);
 
 	/**
 	 * Special value that can be returned by value processors to indicate that the normal automatic
