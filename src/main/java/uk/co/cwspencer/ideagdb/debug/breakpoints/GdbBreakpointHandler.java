@@ -1,24 +1,24 @@
 package uk.co.cwspencer.ideagdb.debug.breakpoints;
 
-import java.util.List;
-
+import consulo.application.AllIcons;
+import consulo.execution.debug.XSourcePosition;
+import consulo.execution.debug.breakpoint.XBreakpointHandler;
+import consulo.execution.debug.breakpoint.XBreakpointProperties;
+import consulo.execution.debug.breakpoint.XLineBreakpoint;
+import consulo.logging.Logger;
+import consulo.util.collection.BidirectionalMap;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.util.containers.BidirectionalMap;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
-import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
-import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.messages.GdbBreakpoint;
 import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
 import uk.co.cwspencer.gdb.messages.GdbEvent;
 import uk.co.cwspencer.ideagdb.debug.GdbDebugProcess;
 
+import java.util.List;
+
 public class GdbBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<XBreakpointProperties>>
 {
-	private static final Logger m_log = Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointHandler");
+	private static final Logger m_log = Logger.getInstance(GdbBreakpointHandler.class);
 
 	private Gdb m_gdb;
 	private GdbDebugProcess m_debugProcess;

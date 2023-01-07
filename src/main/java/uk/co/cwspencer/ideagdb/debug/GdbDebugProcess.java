@@ -1,46 +1,41 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+import consulo.application.AllIcons;
+import consulo.execution.debug.XDebugProcess;
+import consulo.execution.debug.XDebugSession;
+import consulo.execution.debug.XSourcePosition;
+import consulo.execution.debug.breakpoint.XBreakpoint;
+import consulo.execution.debug.breakpoint.XBreakpointHandler;
+import consulo.execution.debug.breakpoint.XBreakpointProperties;
+import consulo.execution.debug.evaluation.XDebuggerEditorsProvider;
+import consulo.execution.debug.ui.XDebugTabLayouter;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.execution.ui.ExecutionConsole;
+import consulo.execution.ui.console.ConsoleView;
+import consulo.execution.ui.console.ConsoleViewContentType;
+import consulo.execution.ui.layout.PlaceInGrid;
+import consulo.execution.ui.layout.RunnerLayoutUi;
+import consulo.logging.Logger;
+import consulo.ui.ex.action.ActionPlaces;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.DefaultActionGroup;
+import consulo.ui.ex.content.Content;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.ui.ConsoleView;
-import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.execution.ui.ExecutionConsole;
-import com.intellij.execution.ui.RunnerLayoutUi;
-import com.intellij.execution.ui.layout.PlaceInGrid;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.ui.content.Content;
-import com.intellij.xdebugger.XDebugProcess;
-import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.breakpoints.XBreakpoint;
-import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
-import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
-import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
-import com.intellij.xdebugger.ui.XDebugTabLayouter;
 import uk.co.cwspencer.gdb.Gdb;
 import uk.co.cwspencer.gdb.GdbListener;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiResultRecord;
 import uk.co.cwspencer.gdb.gdbmi.GdbMiStreamRecord;
-import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
-import uk.co.cwspencer.gdb.messages.GdbEvent;
-import uk.co.cwspencer.gdb.messages.GdbRunningEvent;
-import uk.co.cwspencer.gdb.messages.GdbStoppedEvent;
-import uk.co.cwspencer.gdb.messages.GdbThread;
-import uk.co.cwspencer.gdb.messages.GdbThreadInfo;
+import uk.co.cwspencer.gdb.messages.*;
 import uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointHandler;
 import uk.co.cwspencer.ideagdb.run.GdbRunConfiguration;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 public class GdbDebugProcess extends XDebugProcess implements GdbListener
 {
-	private static final Logger LOGGER = Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbDebugProcess");
+	private static final Logger LOGGER = Logger.getInstance(GdbDebugProcess.class);
 
 	private GdbDebuggerEditorsProvider m_editorsProvider = new GdbDebuggerEditorsProvider();
 	private ConsoleView myConsole;

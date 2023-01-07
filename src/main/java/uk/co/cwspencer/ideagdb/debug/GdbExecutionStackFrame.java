@@ -1,36 +1,31 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import java.io.File;
-
+import consulo.application.AllIcons;
+import consulo.execution.debug.XDebuggerBundle;
+import consulo.execution.debug.XDebuggerUtil;
+import consulo.execution.debug.XSourcePosition;
+import consulo.execution.debug.evaluation.XDebuggerEvaluator;
+import consulo.execution.debug.frame.XCompositeNode;
+import consulo.execution.debug.frame.XStackFrame;
+import consulo.execution.debug.frame.XValueChildrenList;
+import consulo.logging.Logger;
+import consulo.ui.ex.ColoredTextContainer;
+import consulo.ui.ex.SimpleTextAttributes;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.ColoredTextContainer;
-import com.intellij.ui.SimpleTextAttributes;
-import com.intellij.xdebugger.XDebuggerBundle;
-import com.intellij.xdebugger.XDebuggerUtil;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
-import com.intellij.xdebugger.frame.XCompositeNode;
-import com.intellij.xdebugger.frame.XStackFrame;
-import com.intellij.xdebugger.frame.XValueChildrenList;
 import uk.co.cwspencer.gdb.Gdb;
-import uk.co.cwspencer.gdb.messages.GdbErrorEvent;
-import uk.co.cwspencer.gdb.messages.GdbEvent;
-import uk.co.cwspencer.gdb.messages.GdbStackFrame;
-import uk.co.cwspencer.gdb.messages.GdbVariableObject;
-import uk.co.cwspencer.gdb.messages.GdbVariableObjects;
+import uk.co.cwspencer.gdb.messages.*;
+
+import java.io.File;
 
 /**
  * Class for providing information about a stack frame.
  */
 public class GdbExecutionStackFrame extends XStackFrame
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.debug.GdbExecutionStackFrame");
+	private static final Logger m_log = Logger.getInstance(GdbExecutionStackFrame.class);
 
 	// The GDB instance
 	private Gdb m_gdb;

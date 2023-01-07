@@ -1,15 +1,18 @@
 package uk.co.cwspencer.ideagdb.debug.breakpoints;
 
-import org.jetbrains.annotations.NotNull;
-import com.intellij.xdebugger.breakpoints.XLineBreakpointTypeBase;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.debug.breakpoint.XLineBreakpointTypeBase;
 import uk.co.cwspencer.ideagdb.debug.GdbDebuggerEditorsProvider;
 
+import javax.annotation.Nonnull;
+
+@ExtensionImpl
 public class GdbBreakpointType extends XLineBreakpointTypeBase
 {
-	@NotNull
+	@Nonnull
 	public static GdbBreakpointType getInstance()
 	{
-		return EXTENSION_POINT_NAME.findExtension(GdbBreakpointType.class);
+		return EXTENSION_POINT_NAME.findExtensionOrFail(GdbBreakpointType.class);
 	}
 
 	public GdbBreakpointType()

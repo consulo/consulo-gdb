@@ -1,15 +1,15 @@
 package uk.co.cwspencer.ideagdb.debug;
 
+import consulo.codeEditor.EditorFactory;
+import consulo.document.Document;
+import consulo.execution.debug.XSourcePosition;
+import consulo.execution.debug.evaluation.EvaluationMode;
+import consulo.execution.debug.evaluation.XDebuggerEditorsProvider;
+import consulo.project.Project;
+import consulo.virtualFileSystem.fileType.FileType;
+import consulo.virtualFileSystem.fileType.UnknownFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.EditorFactory;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.UnknownFileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.evaluation.EvaluationMode;
-import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 
 public class GdbDebuggerEditorsProvider extends XDebuggerEditorsProvider
 {
@@ -24,7 +24,7 @@ public class GdbDebuggerEditorsProvider extends XDebuggerEditorsProvider
 	@NotNull
 	@Override
 	public Document createDocument(@NotNull Project project, @NotNull String text,
-		@Nullable XSourcePosition sourcePosition, @NotNull EvaluationMode mode)
+								   @Nullable XSourcePosition sourcePosition, @NotNull EvaluationMode mode)
 	{
 		// TODO: Return a proper value
 		return EditorFactory.getInstance().createDocument(text);

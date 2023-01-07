@@ -1,22 +1,25 @@
 package consulo.gdb;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
-import consulo.xdebugger.breakpoints.XLineBreakpointTypeResolver;
+import consulo.annotation.access.RequiredReadAction;
+import consulo.execution.debug.breakpoint.XLineBreakpointType;
+import consulo.execution.debug.breakpoint.XLineBreakpointTypeResolver;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
 import uk.co.cwspencer.ideagdb.debug.breakpoints.GdbBreakpointType;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author VISTALL
  * @since 5/8/2016
  */
-public class GdbBreakpointTypeResolver implements XLineBreakpointTypeResolver
+public abstract class GdbBreakpointTypeResolver implements XLineBreakpointTypeResolver
 {
+	@RequiredReadAction
 	@Nullable
 	@Override
-	public XLineBreakpointType<?> resolveBreakpointType(@NotNull Project project, @NotNull VirtualFile virtualFile, int line)
+	public XLineBreakpointType<?> resolveBreakpointType(@Nonnull Project project, @Nonnull VirtualFile virtualFile, int line)
 	{
 		return GdbBreakpointType.getInstance();
 	}

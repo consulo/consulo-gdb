@@ -1,54 +1,68 @@
 package uk.co.cwspencer.ideagdb.run;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import org.jetbrains.annotations.NotNull;
+import consulo.application.AllIcons;
+import consulo.configurable.ConfigurationException;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.localize.LocalizeValue;
+import consulo.process.cmd.ParametersListUtil;
+import consulo.project.Project;
+import consulo.ui.Component;
+import consulo.ui.TextBoxWithExpandAction;
+import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.ex.FileChooserTextBoxBuilder;
+import consulo.ui.util.FormBuilder;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
 
-public class GdbRunConfigurationEditor<T extends GdbRunConfiguration>
-	extends SettingsEditor<T>
+public class GdbRunConfigurationEditor<T extends GdbRunConfiguration> extends SettingsEditor<T>
 {
-	private static final Logger m_log =
-		Logger.getInstance("#uk.co.cwspencer.ideagdb.run.GdbRunConfigurationEditor");
+	private FileChooserTextBoxBuilder.Controller myGdbPathController;
+	private FileChooserTextBoxBuilder.Controller myAppPathController;
+	private TextBoxWithExpandAction myStartupParameters;
 
-	private JPanel m_contentPanel;
-	private TextFieldWithBrowseButton m_gdbPath;
-	private TextFieldWithBrowseButton m_appPath;
-	private JTextArea m_startupCommands;
+	private Component myRootComponent;
 
+	@RequiredUIAccess
 	public GdbRunConfigurationEditor(final Project project)
 	{
+		FormBuilder builder = FormBuilder.create();
+
+		myGdbPathController = FileChooserTextBoxBuilder.create(project).fileChooserDescriptor(FileChooserDescriptorFactory.createSingleLocalFileDescriptor()).build();
+		builder.addLabeled(LocalizeValue.localizeTODO("&GDB executable:"), myGdbPathController.getComponent());
+
+		myAppPathController = FileChooserTextBoxBuilder.create(project).fileChooserDescriptor(FileChooserDescriptorFactory.createSingleLocalFileDescriptor()).build();
+		builder.addLabeled(LocalizeValue.localizeTODO("&Application executable:"), myAppPathController.getComponent());
+
+		builder.addLabeled(LocalizeValue.localizeTODO("&Startup commands:"), myStartupParameters = TextBoxWithExpandAction.create(AllIcons.Actions.ShowViewer, "", ParametersListUtil
+				.DEFAULT_LINE_PARSER, ParametersListUtil.DEFAULT_LINE_JOINER));
+
+		myRootComponent = builder.build();
 	}
 
 	@Override
+	@RequiredUIAccess
 	protected void resetEditorFrom(T configuration)
 	{
-		m_gdbPath.setText(configuration.GDB_PATH);
-		m_appPath.setText(configuration.APP_PATH);
-		m_startupCommands.setText(configuration.STARTUP_COMMANDS);
+		myGdbPathController.setValue(configuration.GDB_PATH);
+		myAppPathController.setValue(configuration.APP_PATH);
+		myStartupParameters.setValue(configuration.STARTUP_COMMANDS);
 	}
 
 	@Override
+	@RequiredUIAccess
 	protected void applyEditorTo(T configuration) throws ConfigurationException
 	{
-		configuration.GDB_PATH = m_gdbPath.getText();
-		configuration.APP_PATH = m_appPath.getText();
-		configuration.STARTUP_COMMANDS = m_startupCommands.getText();
+		configuration.GDB_PATH = myGdbPathController.getValue();
+		configuration.APP_PATH = myAppPathController.getValue();
+		configuration.STARTUP_COMMANDS = myStartupParameters.getValue();
 	}
 
-	@NotNull
+	@RequiredUIAccess
+	@Nullable
 	@Override
-	protected JComponent createEditor()
+	protected Component createUIComponent()
 	{
-		return m_contentPanel;
-	}
-
-	@Override
-	protected void disposeEditor()
-	{
+		return myRootComponent;
 	}
 }
