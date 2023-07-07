@@ -1,13 +1,15 @@
 package uk.co.cwspencer.ideagdb.run;
 
 import consulo.annotation.component.ExtensionImpl;
-import consulo.application.AllIcons;
 import consulo.execution.configuration.ConfigurationFactory;
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.ConfigurationTypeUtil;
 import consulo.execution.configuration.RunConfiguration;
 import consulo.gdb.GdbSupportProvider;
+import consulo.gdb.localize.GdbLocalize;
+import consulo.localize.LocalizeValue;
 import consulo.module.extension.ModuleExtensionHelper;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.project.Project;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
@@ -50,21 +52,21 @@ public class GdbRunConfigurationType implements ConfigurationType
 	};
 
 	@Override
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return "GDB";
+		return GdbLocalize.gdbConfigurationName();
 	}
 
 	@Override
-	public String getConfigurationTypeDescription()
+	public LocalizeValue getConfigurationTypeDescription()
 	{
-		return "GDB debug configuration";
+		return GdbLocalize.gdbConfigurationDescription();
 	}
 
 	@Override
 	public Image getIcon()
 	{
-		return AllIcons.RunConfigurations.Application;
+		return PlatformIconGroup.runconfigurationsApplication();
 	}
 
 	@NotNull

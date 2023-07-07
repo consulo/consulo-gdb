@@ -1,0 +1,4 @@
+gdb.configuration.name:
+  text: GDB
+gdb.configuration.description:
+  text: GDB debug configuration
