@@ -1,6 +1,5 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import consulo.application.AllIcons;
 import consulo.execution.debug.XDebuggerBundle;
 import consulo.execution.debug.XDebuggerUtil;
 import consulo.execution.debug.XSourcePosition;
@@ -9,6 +8,7 @@ import consulo.execution.debug.frame.XCompositeNode;
 import consulo.execution.debug.frame.XStackFrame;
 import consulo.execution.debug.frame.XValueChildrenList;
 import consulo.logging.Logger;
+import consulo.platform.base.icon.PlatformIconGroup;
 import consulo.ui.ex.ColoredTextContainer;
 import consulo.ui.ex.SimpleTextAttributes;
 import consulo.virtualFileSystem.LocalFileSystem;
@@ -165,7 +165,7 @@ public class GdbExecutionStackFrame extends XStackFrame
 			String addressStr = "0x" + Long.toHexString(m_frame.address);
 			component.append(addressStr, SimpleTextAttributes.GRAY_ITALIC_ATTRIBUTES);
 		}
-		component.setIcon(AllIcons.Debugger.StackFrame);
+		component.setIcon(PlatformIconGroup.debuggerFrame());
 	}
 
 	/**
