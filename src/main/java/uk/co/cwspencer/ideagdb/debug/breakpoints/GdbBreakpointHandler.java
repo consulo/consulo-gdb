@@ -1,10 +1,10 @@
 package uk.co.cwspencer.ideagdb.debug.breakpoints;
 
-import consulo.application.AllIcons;
 import consulo.execution.debug.XSourcePosition;
 import consulo.execution.debug.breakpoint.XBreakpointHandler;
 import consulo.execution.debug.breakpoint.XBreakpointProperties;
 import consulo.execution.debug.breakpoint.XLineBreakpoint;
+import consulo.execution.debug.icon.ExecutionDebugIconGroup;
 import consulo.logging.Logger;
 import consulo.util.collection.BidirectionalMap;
 import org.jetbrains.annotations.NotNull;
@@ -152,13 +152,13 @@ public class GdbBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<XBr
 	{
 		if(event instanceof GdbErrorEvent)
 		{
-			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, AllIcons.Debugger.Db_invalid_breakpoint,
+			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, ExecutionDebugIconGroup.breakpointBreakpointinvalid(),
 					((GdbErrorEvent) event).message);
 			return;
 		}
 		if(!(event instanceof GdbBreakpoint))
 		{
-			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, AllIcons.Debugger.Db_invalid_breakpoint,
+			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, ExecutionDebugIconGroup.breakpointBreakpointinvalid(),
 					"Unexpected data received from GDB");
 			m_log.warn("Unexpected event " + event + " received from -break-insert request");
 			return;
@@ -168,7 +168,7 @@ public class GdbBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<XBr
 		GdbBreakpoint gdbBreakpoint = (GdbBreakpoint) event;
 		if(gdbBreakpoint.number == null)
 		{
-			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, AllIcons.Debugger.Db_invalid_breakpoint,
+			m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, ExecutionDebugIconGroup.breakpointBreakpointinvalid(),
 					"No breakpoint number received from GDB");
 			m_log.warn("No breakpoint number received from GDB after -break-insert request");
 			return;
@@ -181,6 +181,6 @@ public class GdbBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<XBr
 
 		// Mark the breakpoint as set
 		// TODO: Don't do this yet if the breakpoint is pending
-		m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, AllIcons.Debugger.Db_verified_breakpoint, null);
+		m_debugProcess.getSession().updateBreakpointPresentation(breakpoint, ExecutionDebugIconGroup.breakpointBreakpointvalid(), null);
 	}
 }

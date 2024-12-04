@@ -1,6 +1,5 @@
 package uk.co.cwspencer.ideagdb.debug;
 
-import consulo.application.AllIcons;
 import consulo.execution.debug.XDebugProcess;
 import consulo.execution.debug.XDebugSession;
 import consulo.execution.debug.XSourcePosition;
@@ -9,6 +8,7 @@ import consulo.execution.debug.breakpoint.XBreakpointHandler;
 import consulo.execution.debug.breakpoint.XBreakpointProperties;
 import consulo.execution.debug.evaluation.XDebuggerEditorsProvider;
 import consulo.execution.debug.ui.XDebugTabLayouter;
+import consulo.execution.icon.ExecutionIconGroup;
 import consulo.execution.runner.ExecutionEnvironment;
 import consulo.execution.ui.ExecutionConsole;
 import consulo.execution.ui.console.ConsoleView;
@@ -167,7 +167,7 @@ public class GdbDebugProcess extends XDebugProcess implements GdbListener
 			@Override
 			public void registerAdditionalContent(@NotNull RunnerLayoutUi ui)
 			{
-				Content gdbConsoleContent = ui.createContent("GdbConsoleContent", myGdbConsole.getComponent(), "GDB Console", AllIcons.Debugger.Console,
+				Content gdbConsoleContent = ui.createContent("GdbConsoleContent", myGdbConsole.getComponent(), "GDB Console", ExecutionIconGroup.console(),
 						myGdbConsole.getPreferredFocusableComponent());
 				gdbConsoleContent.setCloseable(false);
 

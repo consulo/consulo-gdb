@@ -165,7 +165,6 @@ public class GdbExecutionStackFrame extends XStackFrame
 			String addressStr = "0x" + Long.toHexString(m_frame.address);
 			component.append(addressStr, SimpleTextAttributes.GRAY_ITALIC_ATTRIBUTES);
 		}
-		component.setIcon(PlatformIconGroup.debuggerFrame());
 	}
 
 	/**
