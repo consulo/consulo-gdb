@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uk.co.cwspencer.ideagdb.debug.GdbDebugProcess;
 
-@ExtensionImpl(order = "last")
+@ExtensionImpl(id = "gdb")
 public class GdbRunner extends DefaultProgramRunner
 {
 	@NotNull
