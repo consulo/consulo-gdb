@@ -13,7 +13,7 @@ import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.ex.FileChooserTextBoxBuilder;
 import consulo.ui.util.FormBuilder;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 public class GdbRunConfigurationEditor<T extends GdbRunConfiguration> extends SettingsEditor<T>
 {

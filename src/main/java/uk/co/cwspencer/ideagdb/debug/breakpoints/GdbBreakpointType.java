@@ -4,7 +4,7 @@ import consulo.annotation.component.ExtensionImpl;
 import consulo.execution.debug.breakpoint.XLineBreakpointTypeBase;
 import uk.co.cwspencer.ideagdb.debug.GdbDebuggerEditorsProvider;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 @ExtensionImpl
 public class GdbBreakpointType extends XLineBreakpointTypeBase
