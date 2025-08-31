@@ -4,15 +4,14 @@ import consulo.application.AllIcons;
 import consulo.configurable.ConfigurationException;
 import consulo.execution.configuration.ui.SettingsEditor;
 import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.fileChooser.FileChooserTextBoxBuilder;
 import consulo.localize.LocalizeValue;
 import consulo.process.cmd.ParametersListUtil;
 import consulo.project.Project;
 import consulo.ui.Component;
 import consulo.ui.TextBoxWithExpandAction;
 import consulo.ui.annotation.RequiredUIAccess;
-import consulo.ui.ex.FileChooserTextBoxBuilder;
 import consulo.ui.util.FormBuilder;
-
 import jakarta.annotation.Nullable;
 
 public class GdbRunConfigurationEditor<T extends GdbRunConfiguration> extends SettingsEditor<T>
